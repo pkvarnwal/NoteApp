@@ -1,4 +1,4 @@
-package com.example.noteapp.data.reository
+package com.example.noteapp.data.repository
 
 import com.example.noteapp.data.local.db.NoteDatabase
 import com.example.noteapp.data.local.entity.NoteEntity

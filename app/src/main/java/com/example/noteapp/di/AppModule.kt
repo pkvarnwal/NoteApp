@@ -2,7 +2,7 @@ package com.example.noteapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.noteapp.data.reository.NoteRepositoryImpl
+import com.example.noteapp.data.repository.NoteRepositoryImpl
 import com.example.noteapp.data.local.db.NoteDao
 import com.example.noteapp.data.local.db.NoteDatabase
 import com.example.noteapp.domain.repository.NoteRepository
