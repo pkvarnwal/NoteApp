@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">NoteApp</string>
+    <string name="title">Notes Manager</string>
+    <string name="subtitle">Organise your notes with tags and searches</string>
+    <string name="filter_by_tags">Filter by tags:</string>
 </resources>

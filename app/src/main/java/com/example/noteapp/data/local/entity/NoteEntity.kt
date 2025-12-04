@@ -1,9 +1,7 @@
-package com.example.noteapp.notes.data.local
+package com.example.noteapp.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.Instant
-
 
 @Entity(tableName = "notes")
 data class NoteEntity (

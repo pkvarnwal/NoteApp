@@ -1,10 +1,8 @@
-package com.example.noteapp.notes.data
+package com.example.noteapp.data.reository
 
-import androidx.room.Query
-import androidx.room.RoomDatabase
-import com.example.noteapp.notes.data.local.NoteDatabase
-import com.example.noteapp.notes.data.local.NoteEntity
-import com.example.noteapp.notes.domain.repository.NoteRepository
+import com.example.noteapp.data.local.db.NoteDatabase
+import com.example.noteapp.data.local.entity.NoteEntity
+import com.example.noteapp.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

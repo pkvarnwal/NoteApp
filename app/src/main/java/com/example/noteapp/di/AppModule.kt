@@ -2,10 +2,10 @@ package com.example.noteapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.noteapp.notes.data.NoteRepositoryImpl
-import com.example.noteapp.notes.data.local.NoteDao
-import com.example.noteapp.notes.data.local.NoteDatabase
-import com.example.noteapp.notes.domain.repository.NoteRepository
+import com.example.noteapp.data.reository.NoteRepositoryImpl
+import com.example.noteapp.data.local.db.NoteDao
+import com.example.noteapp.data.local.db.NoteDatabase
+import com.example.noteapp.domain.repository.NoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

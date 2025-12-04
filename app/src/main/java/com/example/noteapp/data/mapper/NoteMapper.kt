@@ -1,7 +1,7 @@
-package com.example.noteapp.notes.data.mapper
+package com.example.noteapp.data.mapper
 
-import com.example.noteapp.notes.data.Note
-import com.example.noteapp.notes.data.local.NoteEntity
+import com.example.noteapp.domain.model.Note
+import com.example.noteapp.data.local.entity.NoteEntity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -10,7 +10,7 @@ private val displayFormatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefaul
 
 fun NoteEntity.toNote() : Note {
     return Note(
-        id = id.toString(),
+        id = id,
         title = title,
         body = body,
         tags = tags,

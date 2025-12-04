@@ -1,11 +1,10 @@
-package com.example.noteapp.notes.presentation.notes_list
+package com.example.noteapp.presentation.notes_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
-import com.example.noteapp.notes.data.local.NoteEntity
-import com.example.noteapp.notes.data.mapper.toNote
-import com.example.noteapp.notes.domain.repository.NoteRepository
+import com.example.noteapp.data.local.entity.NoteEntity
+import com.example.noteapp.data.mapper.toNote
+import com.example.noteapp.domain.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
@@ -26,10 +24,7 @@ class NotesViewModel @Inject constructor(private val noteRepository: NoteReposit
     private val _state = MutableStateFlow(NotesState())
     val state = _state.asStateFlow()
 
-
     init {
-        //searchNotes(query = _state.value.query)
-        // observeSearchQuery()
         getAllNotes()
         observeNotes()
     }
@@ -62,6 +57,7 @@ class NotesViewModel @Inject constructor(private val noteRepository: NoteReposit
                 tags = if (tags.isBlank()) emptyList()
                 else tags.split(",").map { it.trim() },
             )
+            onDismissAddNoteSheet()
             noteRepository.saveNote(note)
         }
     }
@@ -72,49 +68,8 @@ class NotesViewModel @Inject constructor(private val noteRepository: NoteReposit
         }
     }
 
-//    fun updateSearchQuery(query: String) {
-//        viewModelScope.launch {
-//            _state.update {
-//                it.copy(
-//                    query = query
-//                )
-//            }
-//        }
-//        searchNotes(_state.value.query)
-//    }
-
-    fun searchNotes(query: String) {
-        viewModelScope.launch {
-            noteRepository.searchNotes(_state.value.query).collect { notes ->
-                _state.value = state.value.copy(
-                    notes = notes.map { it.toNote() },
-                    showAddNoteSheet = false
-                )
-            }
-        }
-    }
-
     fun updateSearchQuery(query: String) {
         _state.update { it.copy(query = query) }
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-    private fun observeSearchQuery() {
-        viewModelScope.launch {
-            _state
-                .map { it.query }
-                .debounce(300)
-                .flatMapLatest { noteRepository.searchNotes(it) }
-                .collect { notes ->
-                    _state.update {
-                        it.copy(
-                            notes = notes.map { it.toNote() },
-                            showAddNoteSheet = false,
-                            tags = notes.flatMap { it.tags }.distinct()
-                        )
-                    }
-                }
-        }
     }
 
     fun updateSelectedTags(tag: String) {
@@ -153,10 +108,7 @@ class NotesViewModel @Inject constructor(private val noteRepository: NoteReposit
                 .collect { filteredNotes ->
                     _state.update {
                         it.copy(
-                            notes = filteredNotes.map { it.toNote() },
-                            showAddNoteSheet = false,
-                            // build the dynamic tag list from ALL notes (not filtered)
-                           // tags = filteredNotes.flatMap { note -> note.tags }.distinct()
+                            notes = filteredNotes.map { it.toNote() }
                         )
                     }
                 }

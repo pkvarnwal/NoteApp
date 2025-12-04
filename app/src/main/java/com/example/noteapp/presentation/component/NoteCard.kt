@@ -1,4 +1,4 @@
-package com.example.noteapp.notes.presentation.component
+package com.example.noteapp.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -24,12 +23,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.noteapp.notes.data.Note
+import com.example.noteapp.domain.model.Note
 import com.example.noteapp.ui.theme.White
 
-
 @Composable
-fun NoteCard (
+fun NoteCard(
     note: Note,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
@@ -41,7 +39,7 @@ fun NoteCard (
             containerColor = White
         )
     ) {
-        Column (
+        Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Row(
@@ -72,12 +70,11 @@ fun NoteCard (
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TagsInline (note.tags)
+                TagsInline(note.tags)
 
                 Text(
                     modifier = Modifier.weight(1f),
@@ -86,23 +83,6 @@ fun NoteCard (
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewNoteCard() {
-    val note = Note(
-        id = "1",
-        title = "Sample Note 1",
-        body = "Sample Body 1",
-        tags = listOf("Shopping", "Home"),
-        date = "29, june, 2025"
-    )
-    NoteCard(
-        note = note,
-        onDelete = {}
-    )
 }

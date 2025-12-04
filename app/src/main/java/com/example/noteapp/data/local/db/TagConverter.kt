@@ -1,4 +1,4 @@
-package com.example.noteapp.notes.data.local
+package com.example.noteapp.data.local.db
 
 import androidx.room.TypeConverter
 

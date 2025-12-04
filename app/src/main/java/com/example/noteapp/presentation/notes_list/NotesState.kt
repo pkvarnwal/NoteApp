@@ -1,6 +1,6 @@
-package com.example.noteapp.notes.presentation.notes_list
+package com.example.noteapp.presentation.notes_list
 
-import com.example.noteapp.notes.data.Note
+import com.example.noteapp.domain.model.Note
 
 data class NotesState(
     val id : Long = 0,
